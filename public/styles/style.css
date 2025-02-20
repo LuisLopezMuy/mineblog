@@ -1,0 +1,56 @@
+body {
+    background-color: rgb(222, 222, 229);
+    padding-top: 75px;    
+    padding-bottom: 10px;
+}
+
+.navbar {
+    background-color: black !important;
+}
+
+.navbar-brand-flex {
+    font-family: "press start 2p";
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    font-size: larger;
+}
+
+.icon {
+    width: 40px;
+    margin-right: 15px;
+}
+
+.title {
+    font-family: "press start 2p";
+
+}
+
+.transparent {
+    background-color: transparent !important;
+}
+
+.bigIcon {
+    width: 100px;
+    margin-bottom: 50px;
+}
+
+.about,
+.contact {
+    margin-top: 22vh !important;
+    margin-bottom: 22vh !important;
+}
+
+.space {
+    padding: 0px;
+}
+
+.card{
+    background-color: transparent;
+    border: none;
+}
+
+footer{
+    margin-top: 30px;
+}
