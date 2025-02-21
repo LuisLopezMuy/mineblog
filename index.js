@@ -33,31 +33,34 @@ app.get("/x",(req,res)=>{
     res.render("viewPost.ejs")
 })
 
+app.get("/newpost",(req,res)=>{
+    res.render("newpost.ejs")
+})
+
 app.get("/viewpost/:slug",(req,res)=>{
     const slug = req.params.slug;
-    const index = posts.findIndex(post=>post.slug === slug);
 
-    if (index === -1) {     //Si no cuentuetra coincidencia, que arroje un error 404
+    const post = posts.find(post=>post.slug === slug);
+
+    if (post == undefined) {     //Si no cuentuetra coincidencia, que arroje un error 404
         return res.status(404).json({ message: "Item no encontrado" });
     }
 
-    
-    res.render("viewPost.ejs",{posts: posts, index: index})
-
-
+    res.render("viewPost.ejs",{post: post, posts: posts})
 })
+
 
 
 app.get("/editpost/:slug",(req,res)=>{
     const slug = req.params.slug;
-    const index = posts.findIndex(post=>post.slug === slug)
 
-    if (index === -1) {     //Si no cuentuetra coincidencia, que arroje un error 404
+    const post = posts.find(post=>post.slug === slug);
+
+    if (post == undefined) {     //Si no cuentuetra coincidencia, que arroje un error 404
         return res.status(404).json({ message: "Item no encontrado" });
     }
 
-    res.send(posts[index].title)
-
+    res.render("editPost.ejs",{post: post})
 })
 
 
