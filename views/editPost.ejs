@@ -6,7 +6,8 @@
 
 
 
-    <form action="/submit" method="POST">
+    <form action="/edit/<%= post.id %>?_method=PUT" method="POST">   
+        <input type="hidden" name="_method" value="PUT">
 
 
         <main class="container">
@@ -15,7 +16,7 @@
 
                 <div class="form-floating mb-3">
                     <textarea class="form-control fst-italic fs-1" id="title" name="title" placeholder=""
-                        style="height: 150px; font-weight: 500;" requiered><%= post.title %></textarea>
+                        style="height: 150px; font-weight: 500;" required><%= post.title %></textarea>
                     <label class="fs-5" for="title">Title</label>
                 </div>
 
@@ -30,7 +31,7 @@
 
                         <div class="form-floating">
                             <textarea class="form-control lh-base" id="content" placeholder="" name="content"
-                                style="height: 1000px" requiered><%= post.content %></textarea>
+                                style="height: 1000px" required><%= post.content %></textarea>
                             <label for="content">Conenido del post</label>
                         </div>
 
@@ -49,14 +50,14 @@
 
                             <div class="form-floating mb-3">
                                 <textarea class="form-control fst-italic fs-4" id="author" name="author" placeholder=""
-                                    style="height: 75px" requiered><%= post.author %></textarea>
+                                    style="height: 75px" required><%= post.author %></textarea>
                                 <label for="author">Autor</label>
                             </div>
 
 
                             <div class="form-floating">
                                 <textarea class="form-control lh-base" id="authorInfo" placeholder="" name="authorInfo"
-                                    style="height: 220px" requiered><%= post.authorInfo %></textarea>
+                                    style="height: 220px" required><%= post.authorInfo %></textarea>
                                 <label for="authorInfo">Información del autor</label>
                             </div>
 
@@ -66,12 +67,13 @@
 
                         <div class="d-grid px-4" style="margin-top: 50px;">
 
-                            <button class="btn btn-primary btn-lg fst-italic" type="submit">Crear Post</button>
+                            <button class="btn btn-primary btn-lg fst-italic" type="submit">Guardar Cambios</button>
 
                         </div>
 
                     </div>
                 </div>
+
             </div>
 
         </main>
