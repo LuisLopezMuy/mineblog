@@ -19,7 +19,7 @@ class Post {
 
 }
 
-const posts = JSON.parse(fs.readFileSync("./example.json", "utf-8"));
+const posts = JSON.parse(fs.readFileSync("./posts.json", "utf-8"));
 
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -87,7 +87,7 @@ app.post("/submit", (req, res) => {
     } else {
 
         posts.push(currentPost)
-        fs.writeFileSync("./example.json", JSON.stringify(posts))
+        fs.writeFileSync("./posts.json", JSON.stringify(posts))
         res.redirect(`/viewpost/${currentPost.slug}?redirect=true`);
         //Se debe agregar alerta de exito.
     }
@@ -106,7 +106,7 @@ app.put("/edit/:id", (req, res) => {
     if (posts[id].slug == currentPost.slug || !posts.some(post => post.slug == currentPost.slug)) {
 
         posts[id] = (currentPost)
-        fs.writeFileSync("./example.json", JSON.stringify(posts))
+        fs.writeFileSync("./posts.json", JSON.stringify(posts))
         res.redirect(`/viewpost/${currentPost.slug}?redirect=true`);
         //Se debe agregar alerta de exito.
     } else {
