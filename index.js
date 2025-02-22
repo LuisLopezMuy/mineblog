@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 class Post {
-    constructor(currentPost, id) {
+    constructor(currentPost = { title: "", content: "", author: "", authorInfo: "" }, id = 0) {
         this.id = Number(id);
         this.title = currentPost.title;
         this.content = currentPost.content;
@@ -42,7 +42,8 @@ app.get("/contact", (req, res) => {
 
 
 app.get("/newpost", (req, res) => {
-    res.render("newpost.ejs")
+    const obj = new Post()
+    res.render("newPost.ejs", { post: obj, alert: false })
 })
 
 app.get("/viewpost/:slug", (req, res) => {
@@ -54,7 +55,7 @@ app.get("/viewpost/:slug", (req, res) => {
         return res.status(404).json({ message: "Item no encontrado" });
     }
 
-    res.render("viewPost.ejs", { post: post, posts: posts })
+    res.render("viewPost.ejs", { post: post, posts: posts , alert: req.query.redirect === "true"})
 })
 
 
@@ -68,7 +69,7 @@ app.get("/editpost/:slug", (req, res) => {
         return res.status(404).json({ message: "Item no encontrado" });
     }
 
-    res.render("editPost.ejs", { post: post })
+    res.render("editPost.ejs", { post: post, alert: false })
 })
 
 
@@ -81,15 +82,14 @@ app.post("/submit", (req, res) => {
     const test = posts.findIndex(post => post.slug == currentPost.slug);
     if (test !== -1) {
 
-        console.log("Error");
-        res.send("404");            //Se debe agregar alerta de error.
+        res.render("newPost.ejs", { post: currentPost, alert: true })
 
     } else {
 
         posts.push(currentPost)
         fs.writeFileSync("./example.json", JSON.stringify(posts))
-        res.redirect(`/viewpost/${currentPost.slug}`);
-                                    //Se debe agregar alerta de exito.
+        res.redirect(`/viewpost/${currentPost.slug}?redirect=true`);
+        //Se debe agregar alerta de exito.
     }
 
 })
@@ -107,12 +107,11 @@ app.put("/edit/:id", (req, res) => {
 
         posts[id] = (currentPost)
         fs.writeFileSync("./example.json", JSON.stringify(posts))
-        res.redirect(`/viewpost/${currentPost.slug}`);
-                                    //Se debe agregar alerta de exito.
+        res.redirect(`/viewpost/${currentPost.slug}?redirect=true`);
+        //Se debe agregar alerta de exito.
     } else {
 
-        console.log("Error");
-        res.send("404");            //Se debe agregar alerta de error.
+        res.render("editPost.ejs", { post: currentPost, alert: true })
 
     }
 

@@ -72,3 +72,15 @@ footer {
 .btn-flt>img {
     width: 40px;
 }
+
+.alert {
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    z-index: 1;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 500;
+    width: 40vh;
+    text-align: center;
+}

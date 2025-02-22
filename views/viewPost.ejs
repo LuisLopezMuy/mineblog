@@ -79,7 +79,11 @@
     </a>
 
 
-
+    <% if (alert) { %>
+        <div class="alert alert-primary" role="alert" style="right: 140px;">
+            Publicado con éxito
+        </div>
+        <% } %>
 
 
     <%- include("partials/footer.ejs") %>
